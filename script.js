@@ -136,7 +136,7 @@ function getGradient(probability) {
 function showStep(stepNumber) {
     if (stepNumber === 1) {
         selectedSymptoms = [];
-        document.querySelectorAll('.symptom-card').forEach(card => {card.classList.remove('selected');
+        document.querySelectorAll('symptom-card').forEach(card => {card.classList.remove('selected');
 
         });
         document.getElementById('selectedCounter').style.display = 'none';
