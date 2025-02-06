@@ -134,6 +134,14 @@ function getGradient(probability) {
 
 // Step navigation
 function showStep(stepNumber) {
+    if (stepNumber === 1) {
+        selectedSymptoms = [];
+        document.querySelectorAll('.symptom-card').forEach(card => {card.classList.remove('selected');
+
+        });
+        document.getElementById('selectedCounter').style.display = 'none';
+        document.getElementById('results').innerHTML = '';
+    }
     document.querySelectorAll('.step').forEach(step => {
         step.classList.remove('active');
     });
