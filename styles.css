@@ -79,7 +79,7 @@ h2 {
 
 .symptom-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(108, 91, 123, 0.2);
+    box-shadow: 5px 10px 45px black; 
 }
 
 .symptom-card.selected {

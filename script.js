@@ -7,20 +7,22 @@ const symptoms = [
     { id: 'runny-nose', name: 'Runny Nose', icon: '👃' },
     { id: 'body-aches', name: 'Body Aches', icon: '💪' },
     { id: 'nausea', name: 'Nausea', icon: '🤢' },
-    { id: 'fatigue', name: 'Fatigue', icon: '😴' }
+    { id: 'fatigue', name: 'Fatigue', icon: '😴' },
+    { id: 'sore-throat', name: 'Sore Throat', icon: '🗣️'}, // New Symptom
+    { id: 'chills', name: 'Chills', icon: '🥶'} // New Symtpom
 ];
 
 const conditions = {
     'Common Cold': {
-        symptoms: ['cough', 'sneezing', 'runny-nose'],
+        symptoms: ['cough', 'sneezing', 'runny-nose', 'sore-throat'],
         weight: 0.7
     },
     'Flu': {
-        symptoms: ['fever', 'body-aches', 'headache', 'fatigue'],
+        symptoms: ['fever', 'body-aches', 'headache', 'fatigue', 'chills'],
         weight: 0.9
     },
     'Allergies': {
-        symptoms: ['sneezing', 'runny-nose'],
+        symptoms: ['sneezing', 'runny-nose', 'sore-throat'],
         weight: 0.8
     },
     'Migraine': {
