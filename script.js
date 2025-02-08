@@ -28,6 +28,9 @@ const conditions = {
     'Migraine': {
         symptoms: ['headache', 'nausea'],
         weight: 0.85
+    },
+    'Pneumonia': {
+        symptoms: ['fever', 'cough', 'fatigue', 'body-aches', 'chills']
     }
 };
 
@@ -161,3 +164,5 @@ function showToast(message) {
 
 // Initialize
 window.onload = initializeSymptoms;
+
+// Next goal is to provide more specific feedback. Once the symptoms are analysed, give some advice on next steps and any recomendations. Any doctor advice etc.
