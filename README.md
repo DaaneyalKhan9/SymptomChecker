@@ -17,3 +17,17 @@ A web based **Symptom Checker** that helps users identify possible health condit
 
 ---
 
+## 🛠️ **Tech Stack**
+- **Frontend**: HTML, CSS, JavaScript
+- **Libraries**: Font Awesome (icons), Vanilla JS
+- **Deployment**: GitHub Pages
+
+---
+
+## 🏥 **How It Works**
+1. **Select Symptoms** → Choose symptoms from the available options.
+2. **Click "Analyze Symptoms"** → The system calculates probabilities.
+3. **Get Possible Conditions** → Results sorted by severity.
+4. **Medical Advice Alert** → Warning if serious conditions detected.
+
+---
