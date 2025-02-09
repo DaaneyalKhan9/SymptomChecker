@@ -15,22 +15,28 @@ const symptoms = [
 const conditions = {
     'Common Cold': {
         symptoms: ['cough', 'sneezing', 'runny-nose', 'sore-throat'],
-        weight: 0.7
+        weight: 0.7,
+        severity: 'mild'
     },
     'Flu': {
         symptoms: ['fever', 'body-aches', 'headache', 'fatigue', 'chills'],
-        weight: 0.9
+        weight: 0.9,
+        severity: 'moderate'
     },
     'Allergies': {
         symptoms: ['sneezing', 'runny-nose', 'sore-throat'],
-        weight: 0.8
+        weight: 0.8,
+        severity: 'mild'
     },
     'Migraine': {
         symptoms: ['headache', 'nausea'],
-        weight: 0.85
+        weight: 0.85,
+        severity: 'mild'
     },
     'Pneumonia': {
-        symptoms: ['fever', 'cough', 'fatigue', 'body-aches', 'chills']
+        symptoms: ['fever', 'cough', 'fatigue', 'body-aches', 'chills'],
+        weight: 0.92,
+        severity: 'severe'
     }
 };
 
@@ -73,12 +79,20 @@ function toggleSymptom(symptomId) {
 
 // Analyze symptoms
 function analyzeSymptoms() {
-    if (selectedSymptoms.length === 0) {
-        showToast('⚠️ Please select at least one symptom!');
+    if (selectedSymptoms.length < 2) {
+        showToast('⚠️ Please select at least two symptoms!');
         return;
     }
 
     const matches = calculateProbabilities();
+
+    // Check if any condition is severe
+    const hasSevereCondition = matches.some(result => result.severity === 'severe');
+
+    if (hasSevereCondition) {
+        alert("⚠️ Some of your symptoms match a serious condition. Consider seeking medical attention");
+
+    }
     showResults(matches);
     showStep(2);
 }
@@ -100,12 +114,17 @@ function calculateProbabilities() {
         if (probability > 20) {
             results.push({
                 condition,
-                probability: probability.toFixed(1)
+                probability: probability.toFixed(1),
+                severity: data.severity // Include severity in the result
             });
         }
     }
 
-    return results.sort((a, b) => b.probability - a.probability);
+    // Sort first by severity level, then by probability
+    return results.sort((a, b) => {
+        const severityOrder = { 'severe': 3, 'moderate': 2, 'mild': 1 };
+        return (severityOrder[b.severity] - severityOrder[a.severity]) || (b.probability - a.probability);
+    });
 }
 
 // Show results
@@ -114,10 +133,16 @@ function showResults(results) {
     container.innerHTML = '';
     
     results.forEach(result => {
+        const severityColor = {
+            mild: 'green',
+            moderate: 'orange',
+            severe: 'red'
+        }[result.severity];
+
         const div = document.createElement('div');
         div.className = 'result-item';
         div.innerHTML = `
-            <h3>${result.condition}</h3>
+            <h3 style="color: ${severityColor};">${result.condition} (${result.severity.toUpperCase()})</h3>
             <div class="probability-meter">
                 <div class="probability-fill" 
                      style="width: ${result.probability}%; background: ${getGradient(result.probability)}">
@@ -141,8 +166,8 @@ function getGradient(probability) {
 function showStep(stepNumber) {
     if (stepNumber === 1) {
         selectedSymptoms = [];
-        document.querySelectorAll('symptom-card').forEach(card => {card.classList.remove('selected');
-
+        document.querySelectorAll('.symptom-card').forEach(card => {
+            card.classList.remove('selected');
         });
         document.getElementById('selectedCounter').style.display = 'none';
         document.getElementById('results').innerHTML = '';
